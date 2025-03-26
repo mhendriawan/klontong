@@ -30,9 +30,9 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, Product>> updateProduct(Product product) async {
+  Future<Either<Failure, String>> updateProduct(Product product) async {
     try {
-      Product res = await productDataSource.updateProduct(product);
+      String res = await productDataSource.updateProduct(product);
       return Right(res);
     } on DioException catch (e) {
       return handleDioException(e);

@@ -10,7 +10,7 @@ abstract class ProductRepository {
 
   Future<Either<Failure, List<Product>>> fetchProducts();
 
-  Future<Either<Failure, Product>> updateProduct(Product product);
+  Future<Either<Failure, String>> updateProduct(Product product);
 
   Future<Either<Failure, Product>> deleteProduct(String productId);
 }

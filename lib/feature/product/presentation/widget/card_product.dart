@@ -47,7 +47,24 @@ class CardProduct extends StatelessWidget {
               ),
             ],
           ),
+          16.verticalSpace,
+          BMButtonSecondary(
+            text: 'Ubah',
+            onTap: () => onTapUpdate(context),
+          ),
         ],
+      ),
+    );
+  }
+
+  onTapUpdate(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductView(
+          isEdit: true,
+          product: product,
+        ),
       ),
     );
   }
