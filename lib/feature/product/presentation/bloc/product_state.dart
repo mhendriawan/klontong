@@ -47,3 +47,11 @@ final class UpdatingProduct extends ProductState {
 final class UpdatedProduct extends ProductState {
   const UpdatedProduct();
 }
+
+final class DeletingProduct extends ProductState {
+  const DeletingProduct();
+}
+
+final class DeletedProduct extends ProductState {
+  const DeletedProduct();
+}

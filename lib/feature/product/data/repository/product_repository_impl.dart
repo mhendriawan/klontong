@@ -40,4 +40,16 @@ class ProductRepositoryImpl implements ProductRepository {
       return Left(InternalErrorException());
     }
   }
+
+  @override
+  Future<Either<Failure, Product>> deleteProduct(String productId) async {
+    try {
+      Product res = await productDataSource.deleteProduct(productId);
+      return Right(res);
+    } on DioException catch (e) {
+      return handleDioException(e);
+    } catch (e) {
+      return Left(InternalErrorException());
+    }
+  }
 }

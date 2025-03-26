@@ -54,5 +54,17 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         },
       );
     });
+
+    on<DeleteProduct>((event, emit) async {
+      emit(const UpdatingProduct());
+
+      var response = await productRepository.deleteProduct(event.productId);
+      response.fold(
+        (failure) => onFailure(failure, emit),
+        (response) {
+          emit(const DeletedProduct());
+        },
+      );
+    });
   }
 }

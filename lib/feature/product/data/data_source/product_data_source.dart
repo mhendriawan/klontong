@@ -10,4 +10,6 @@ abstract class ProductDataSource {
   Future<List<Product>> fetchProducts();
 
   Future<Product> updateProduct(Product product);
+
+  Future<Product> deleteProduct(String productId);
 }

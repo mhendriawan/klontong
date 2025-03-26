@@ -37,4 +37,13 @@ class ProductDataSourceImpl implements ProductDataSource {
     );
     return Product.fromJson(response.data);
   }
+
+  @override
+  Future<Product> deleteProduct(String productId) async {
+    Response<dynamic> response = await dio.delete(
+      "${UrlConstant.product}/$productId",
+      options: Options(headers: headers),
+    );
+    return Product.fromJson(response.data);
+  }
 }
