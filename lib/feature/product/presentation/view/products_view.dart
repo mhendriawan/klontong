@@ -24,14 +24,7 @@ class ProductsWidget extends StatefulWidget {
 }
 
 class _ProductsWidgetState extends State<ProductsWidget> {
-  List<Product> products = [
-    Product(
-      name: "Ciki",
-      description: "Ciki ciki yang super enak, hanya di toko klontong kami",
-      price: 100000,
-      qty: 10,
-    ),
-  ];
+  List<Product> products = [];
 
   @override
   Widget build(BuildContext context) {
