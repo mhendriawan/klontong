@@ -6,11 +6,11 @@ String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.
 
 class Product {
   final String id;
-  final String name;
-  final String description;
-  final int qty;
-  final String image;
-  final int price;
+  String name;
+  String description;
+  int qty;
+  String image;
+  int price;
 
   Product({
     this.id = "",
