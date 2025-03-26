@@ -25,7 +25,15 @@ class ProductDataSourceImpl implements ProductDataSource {
       UrlConstant.product,
       options: Options(headers: headers),
     );
-    return productFromJson(response.data);
+    List<Product> products = [];
+    if (response.data.isEmpty) {
+      return products;
+    }
+    for (int i = 0; i < response.data.length; i++) {
+      products.add(Product.fromJson(response.data[i]));
+    }
+
+    return products;
   }
 
   @override
