@@ -39,7 +39,10 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   Product product = products[index];
-                  return CardProduct(product: product);
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: CardProduct(product: product),
+                  );
                 },
               ),
             ),
