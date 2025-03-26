@@ -44,6 +44,7 @@ class ProductWidget extends StatefulWidget {
 class _ProductWidgetState extends State<ProductWidget> {
   String title = "";
   Product product = Product();
+  bool isDisable = true;
 
   @override
   void initState() {
@@ -85,17 +86,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                           BMTextFormField(
                             initialValue: product.name,
                             label: "Product Name",
-                            onChanged: (value) => setState(() {
-                              product.name = value;
-                            }),
+                            onChanged: (value) => onChangedName(value),
                           ),
                           12.verticalSpace,
                           BMTextFormField(
-                            initialValue: product.name,
+                            initialValue: product.description,
                             label: "Product Description",
-                            onChanged: (value) => setState(() {
-                              product.description = value;
-                            }),
+                            onChanged: (value) => onChangedDescription(value),
                           ),
                           12.verticalSpace,
                           Row(
@@ -106,18 +103,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                       ? null
                                       : product.price.toCurrency(),
                                   label: "Product Price",
-                                  onChanged: (value) => setState(() {
-                                    if (value.isEmpty) {
-                                      product.price = 0;
-                                    } else {
-                                      String numericString = value.replaceAll(
-                                        RegExp(r'[^0-9]'),
-                                        '',
-                                      );
-                                      product.price =
-                                          int.tryParse(numericString) ?? 0;
-                                    }
-                                  }),
+                                  onChanged: (value) => onChangedPrice(value),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     FilteringTextInputFormatter.allow(
@@ -134,13 +120,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                       ? null
                                       : product.qty.toString(),
                                   label: "Qty",
-                                  onChanged: (value) => setState(() {
-                                    if (value.isEmpty) {
-                                      product.qty = 0;
-                                    } else {
-                                      product.qty = int.parse(value);
-                                    }
-                                  }),
+                                  onChanged: (value) => onChangedQty(value),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     FilteringTextInputFormatter.allow(
@@ -156,10 +136,21 @@ class _ProductWidgetState extends State<ProductWidget> {
                     ),
                   ),
                   16.verticalSpace,
-                  BMButton(
-                    isDisable: setDisable(),
-                    text: "Save",
-                    onTap: () => widget.isEdit ? onUpdate() : onCreate(),
+                  BlocBuilder<ProductBloc, ProductState>(
+                    builder: (context, state) {
+                      if (state is EditedProduct) {
+                        isDisable = state.product.name.isEmpty ||
+                            state.product.description.isEmpty ||
+                            state.product.price == 0 ||
+                            state.product.qty == 0;
+                      }
+
+                      return BMButton(
+                        isDisable: isDisable,
+                        text: "Save",
+                        onTap: () => widget.isEdit ? onUpdate() : onCreate(),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -214,5 +205,36 @@ class _ProductWidgetState extends State<ProductWidget> {
 
   onCreate() {
     context.read<ProductBloc>().add(CreateProduct(product));
+  }
+
+  onChangedName(String value) {
+    product.name = value;
+    context.read<ProductBloc>().add(EditProduct(product));
+  }
+
+  onChangedDescription(String value) {
+    product.description = value;
+    context.read<ProductBloc>().add(EditProduct(product));
+  }
+
+  onChangedPrice(String value) {
+    if (value.isEmpty) {
+      product.price = 0;
+    } else {
+      String numericString = value.replaceAll(RegExp(r'[^0-9]'), '');
+      product.price = int.tryParse(numericString) ?? 0;
+    }
+
+    context.read<ProductBloc>().add(EditProduct(product));
+  }
+
+  onChangedQty(String value) {
+    if (value.isEmpty) {
+      product.qty = 0;
+    } else {
+      product.qty = int.parse(value);
+    }
+
+    context.read<ProductBloc>().add(EditProduct(product));
   }
 }

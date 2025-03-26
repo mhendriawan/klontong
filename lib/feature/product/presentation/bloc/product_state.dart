@@ -55,3 +55,12 @@ final class DeletingProduct extends ProductState {
 final class DeletedProduct extends ProductState {
   const DeletedProduct();
 }
+
+class EditedProduct extends ProductState {
+  final Product product;
+
+  const EditedProduct(this.product);
+
+  @override
+  List<Object> get props => [product];
+}

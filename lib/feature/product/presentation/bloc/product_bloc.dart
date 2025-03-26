@@ -18,6 +18,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
   }
 
+  Product product = Product();
+
   ProductBloc(this.productRepository) : super(const ProductInitial()) {
     on<CreateProduct>((event, emit) async {
       emit(const CreatingProduct());
@@ -65,6 +67,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           emit(const DeletedProduct());
         },
       );
+    });
+
+    on<EditProduct>((event, emit) async {
+      emit(EditedProduct(event.product.copyWith()));
     });
   }
 }

@@ -32,3 +32,9 @@ class DeleteProduct extends ProductEvent {
 
   final String productId;
 }
+
+class EditProduct extends ProductEvent {
+  const EditProduct(this.product);
+
+  final Product product;
+}

@@ -61,6 +61,8 @@ class CardProduct extends StatelessWidget {
   }
 
   onTapUpdate(BuildContext context) {
+    context.read<ProductBloc>().add(EditProduct(product));
+
     Navigator.push(
       context,
       MaterialPageRoute(

@@ -33,4 +33,18 @@ class Product {
     "qty": qty,
     "price": price,
   };
+
+  Product copyWith({
+    String? name,
+    String? description,
+    int? price,
+    int? qty,
+  }) {
+    return Product(
+      name: name ?? this.name,
+      description: description ?? this.description,
+      price: price ?? this.price,
+      qty: qty ?? this.qty,
+    );
+  }
 }
