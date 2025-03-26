@@ -6,8 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klontong_app/feature/home/home.dart';
 import 'package:klontong_app/feature/product/product.dart';
 import 'package:klontong_app/utils/extension.dart';
+import 'package:klontong_app/utils/utils.dart';
 
-class ProductView extends StatefulWidget {
+class ProductView extends StatelessWidget {
   const ProductView({
     super.key,
     required this.isEdit,
@@ -18,14 +19,35 @@ class ProductView extends StatefulWidget {
   final Product product;
 
   @override
-  State<ProductView> createState() => _ProductViewState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => sl<ProductBloc>(),
+      child: ProductWidget(isEdit: isEdit, product: product),
+    );
+  }
 }
 
-class _ProductViewState extends State<ProductView> {
+class ProductWidget extends StatefulWidget {
+  const ProductWidget({
+    super.key,
+    required this.isEdit,
+    required this.product,
+  });
+
+  final bool isEdit;
+  final Product product;
+
+  @override
+  State<ProductWidget> createState() => _ProductWidgetState();
+}
+
+class _ProductWidgetState extends State<ProductWidget> {
   String title = "";
+  Product product = Product();
 
   @override
   void initState() {
+    product = widget.product;
     title = widget.isEdit ? "Ubah" : "Tambah";
     super.initState();
   }
@@ -61,18 +83,18 @@ class _ProductViewState extends State<ProductView> {
                           ),
                           16.verticalSpace,
                           BMTextFormField(
-                            initialValue: widget.product.name,
+                            initialValue: product.name,
                             label: "Nama Barang",
-                            onChanged: (value) {
-                              widget.product.name = value;
-                            },
+                            onChanged: (value) => setState(() {
+                              product.name = value;
+                            }),
                           ),
                           12.verticalSpace,
                           BMTextFormField(
-                            initialValue: widget.product.name,
+                            initialValue: product.name,
                             label: "Deskripsi Barang",
                             onChanged: (value) => setState(() {
-                              widget.product.description = value;
+                              product.description = value;
                             }),
                           ),
                           12.verticalSpace,
@@ -82,20 +104,20 @@ class _ProductViewState extends State<ProductView> {
                                 child: BMTextFormField(
                                   initialValue: !widget.isEdit
                                       ? null
-                                      : widget.product.price.toCurrency(),
+                                      : product.price.toCurrency(),
                                   label: "Harga Satuan",
-                                  onChanged: (value) {
+                                  onChanged: (value) => setState(() {
                                     if (value.isEmpty) {
-                                      widget.product.price = 0;
+                                      product.price = 0;
                                     } else {
                                       String numericString = value.replaceAll(
                                         RegExp(r'[^0-9]'),
                                         '',
                                       );
-                                      widget.product.price =
+                                      product.price =
                                           int.tryParse(numericString) ?? 0;
                                     }
-                                  },
+                                  }),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     FilteringTextInputFormatter.allow(
@@ -110,15 +132,15 @@ class _ProductViewState extends State<ProductView> {
                                 child: BMTextFormField(
                                   initialValue: !widget.isEdit
                                       ? null
-                                      : widget.product.qty.toString(),
-                                  label: "StringConstants.amount",
-                                  onChanged: (value) {
+                                      : product.qty.toString(),
+                                  label: "Qty",
+                                  onChanged: (value) => setState(() {
                                     if (value.isEmpty) {
-                                      widget.product.qty = 0;
+                                      product.qty = 0;
                                     } else {
-                                      widget.product.qty = int.parse(value);
+                                      product.qty = int.parse(value);
                                     }
-                                  },
+                                  }),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     FilteringTextInputFormatter.allow(
@@ -176,18 +198,19 @@ class _ProductViewState extends State<ProductView> {
   }
 
   setDisable() {
-    bool isDisable = widget.product.name.isEmpty ||
-        widget.product.description.isEmpty ||
-        widget.product.price == 0 ||
-        widget.product.qty == 0;
+    bool isDisable = product.name.isEmpty ||
+        product.description.isEmpty ||
+        product.price == 0 ||
+        product.qty == 0;
+    setState(() {});
     return isDisable;
   }
 
   onUpdate() {
-    context.read<ProductBloc>().add(UpdateProduct(widget.product));
+    context.read<ProductBloc>().add(UpdateProduct(product));
   }
 
   onCreate() {
-    context.read<ProductBloc>().add(CreateProduct(widget.product));
+    context.read<ProductBloc>().add(CreateProduct(product));
   }
 }

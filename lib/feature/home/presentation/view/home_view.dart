@@ -19,6 +19,23 @@ class HomeView extends StatelessWidget {
         ),
       ),
       body: const ProductsView(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _addProduct(context),
+        tooltip: 'Add Product',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  void _addProduct(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductView(
+          isEdit: false,
+          product: Product(),
+        ),
+      ),
     );
   }
 }
