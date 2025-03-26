@@ -179,6 +179,7 @@ class _ProductWidgetState extends State<ProductWidget> {
 
   productListener(BuildContext context, ProductState state) {
     if (state is CreatedProduct) {
+      Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -188,6 +189,7 @@ class _ProductWidgetState extends State<ProductWidget> {
     }
 
     if (state is UpdatedProduct) {
+      Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
