@@ -46,7 +46,9 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                 },
               ),
             ),
-            LoadingWidget(visible: state is FetchingProducts),
+            LoadingWidget(
+              visible: state is FetchingProducts || state is DeletingProduct,
+            ),
           ],
         );
       },
@@ -56,6 +58,10 @@ class _ProductsWidgetState extends State<ProductsWidget> {
   productListener(BuildContext context, ProductState state) {
     if (state is FetchedProducts) {
       products = state.products;
+    }
+
+    if (state is DeletedProduct) {
+      context.read<ProductBloc>().add(const FetchProducts());
     }
   }
 }

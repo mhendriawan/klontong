@@ -1,5 +1,6 @@
 import 'package:bm_widgets/bm_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klontong_app/feature/product/product.dart';
 import 'package:klontong_app/utils/extension.dart';
@@ -48,9 +49,19 @@ class CardProduct extends StatelessWidget {
             ],
           ),
           16.verticalSpace,
-          BMButtonSecondary(
-            text: 'Ubah',
-            onTap: () => onTapUpdate(context),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              BMButtonSecondary(
+                text: 'Ubah',
+                onTap: () => onTapUpdate(context),
+              ),
+              8.horizontalSpace,
+              BMButtonSecondary(
+                text: 'Hapus',
+                onTap: () => onTapDelete(context),
+              ),
+            ],
           ),
         ],
       ),
@@ -67,5 +78,9 @@ class CardProduct extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  onTapDelete(BuildContext context) {
+    context.read<ProductBloc>().add(DeleteProduct(product.id));
   }
 }

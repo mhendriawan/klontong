@@ -12,5 +12,5 @@ abstract class ProductRepository {
 
   Future<Either<Failure, String>> updateProduct(Product product);
 
-  Future<Either<Failure, Product>> deleteProduct(String productId);
+  Future<Either<Failure, String>> deleteProduct(String productId);
 }

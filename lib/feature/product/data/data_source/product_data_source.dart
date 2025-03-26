@@ -11,5 +11,5 @@ abstract class ProductDataSource {
 
   Future<String> updateProduct(Product product);
 
-  Future<Product> deleteProduct(String productId);
+  Future<String> deleteProduct(String productId);
 }

@@ -42,9 +42,9 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, Product>> deleteProduct(String productId) async {
+  Future<Either<Failure, String>> deleteProduct(String productId) async {
     try {
-      Product res = await productDataSource.deleteProduct(productId);
+      String res = await productDataSource.deleteProduct(productId);
       return Right(res);
     } on DioException catch (e) {
       return handleDioException(e);

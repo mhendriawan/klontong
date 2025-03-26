@@ -56,7 +56,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     });
 
     on<DeleteProduct>((event, emit) async {
-      emit(const UpdatingProduct());
+      emit(const DeletingProduct());
 
       var response = await productRepository.deleteProduct(event.productId);
       response.fold(
