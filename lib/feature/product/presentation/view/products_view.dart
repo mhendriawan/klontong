@@ -33,12 +33,15 @@ class _ProductsWidgetState extends State<ProductsWidget> {
       builder: (context, state) {
         return Stack(
           children: [
-            ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                Product product = products[index];
-                return CardProduct(product: product);
-              },
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  Product product = products[index];
+                  return CardProduct(product: product);
+                },
+              ),
             ),
             LoadingWidget(visible: state is FetchingProducts),
           ],

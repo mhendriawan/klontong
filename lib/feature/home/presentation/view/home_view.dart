@@ -18,10 +18,7 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.fromLTRB(20, 16, 20, 16),
-        child: ProductsView(),
-      ),
+      body: const ProductsView(),
     );
   }
 }
