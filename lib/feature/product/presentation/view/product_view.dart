@@ -48,7 +48,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   @override
   void initState() {
     product = widget.product;
-    title = widget.isEdit ? "Ubah" : "Tambah";
+    title = widget.isEdit ? "Update" : "Create";
     super.initState();
   }
 
@@ -61,7 +61,7 @@ class _ProductWidgetState extends State<ProductWidget> {
           Scaffold(
             appBar: AppBar(
               title: Text(
-                "$title Produk",
+                "$title Product",
                 style: BMTypography.subheading.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
@@ -78,13 +78,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Detail Produk",
+                            "Detail Product",
                             style: BMTypography.bodyTextDarkGrey2,
                           ),
                           16.verticalSpace,
                           BMTextFormField(
                             initialValue: product.name,
-                            label: "Nama Barang",
+                            label: "Product Name",
                             onChanged: (value) => setState(() {
                               product.name = value;
                             }),
@@ -92,7 +92,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                           12.verticalSpace,
                           BMTextFormField(
                             initialValue: product.name,
-                            label: "Deskripsi Barang",
+                            label: "Product Description",
                             onChanged: (value) => setState(() {
                               product.description = value;
                             }),
@@ -105,7 +105,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   initialValue: !widget.isEdit
                                       ? null
                                       : product.price.toCurrency(),
-                                  label: "Harga Satuan",
+                                  label: "Product Price",
                                   onChanged: (value) => setState(() {
                                     if (value.isEmpty) {
                                       product.price = 0;
@@ -158,7 +158,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   16.verticalSpace,
                   BMButton(
                     isDisable: setDisable(),
-                    text: "Simpan",
+                    text: "Save",
                     onTap: () => widget.isEdit ? onUpdate() : onCreate(),
                   ),
                 ],

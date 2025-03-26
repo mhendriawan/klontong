@@ -45,12 +45,12 @@ class CardProduct extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               BMButtonSecondary(
-                text: 'Ubah',
+                text: 'Update',
                 onTap: () => onTapUpdate(context),
               ),
               8.horizontalSpace,
               BMButtonSecondary(
-                text: 'Hapus',
+                text: 'Delete',
                 onTap: () => onTapDelete(context),
               ),
             ],

@@ -12,7 +12,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: BMPalette.white,
         title: Text(
-          "Produk",
+          "Product",
           style: BMTypography.subheading.copyWith(
             fontWeight: FontWeight.w500,
           ),
