@@ -9,7 +9,6 @@ class Product {
   String name;
   String description;
   int qty;
-  String image;
   int price;
 
   Product({
@@ -17,7 +16,6 @@ class Product {
     this.name = "",
     this.description = "",
     this.qty = 0,
-    this.image = "",
     this.price = 0,
   });
 
@@ -26,7 +24,6 @@ class Product {
     name: json["name"] ?? "",
     description: json["description"] ?? "",
     qty: json["qty"] ?? 0,
-    image: json["image"] ?? "",
     price: json["price"] ?? 0,
   );
 
@@ -34,7 +31,6 @@ class Product {
     "name": name,
     "description": description,
     "qty": qty,
-    "image": image,
     "price": price,
   };
 }
