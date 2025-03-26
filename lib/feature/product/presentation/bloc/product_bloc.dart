@@ -42,5 +42,17 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         },
       );
     });
+
+    on<UpdateProduct>((event, emit) async {
+      emit(const UpdatingProduct());
+
+      var response = await productRepository.updateProduct(event.product);
+      response.fold(
+        (failure) => onFailure(failure, emit),
+        (response) {
+          emit(const UpdatedProduct());
+        },
+      );
+    });
   }
 }

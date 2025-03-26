@@ -8,4 +8,6 @@ abstract class ProductDataSource {
   Future<Product> createProduct(Product product);
 
   Future<List<Product>> fetchProducts();
+
+  Future<Product> updateProduct(Product product);
 }

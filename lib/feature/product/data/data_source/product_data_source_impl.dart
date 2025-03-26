@@ -27,4 +27,14 @@ class ProductDataSourceImpl implements ProductDataSource {
     );
     return productFromJson(response.data);
   }
+
+  @override
+  Future<Product> updateProduct(Product product) async {
+    Response<dynamic> response = await dio.put(
+      "${UrlConstant.product}/${product.id}",
+      data: product,
+      options: Options(headers: headers),
+    );
+    return Product.fromJson(response.data);
+  }
 }

@@ -20,3 +20,9 @@ class CreateProduct extends ProductEvent {
 class FetchProducts extends ProductEvent {
   const FetchProducts();
 }
+
+class UpdateProduct extends ProductEvent {
+  const UpdateProduct(this.product);
+
+  final Product product;
+}

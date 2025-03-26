@@ -39,3 +39,11 @@ final class FetchedProducts extends ProductState {
 
   final List<Product> products;
 }
+
+final class UpdatingProduct extends ProductState {
+  const UpdatingProduct();
+}
+
+final class UpdatedProduct extends ProductState {
+  const UpdatedProduct();
+}

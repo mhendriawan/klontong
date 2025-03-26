@@ -9,4 +9,6 @@ abstract class ProductRepository {
   Future<Either<Failure, Product>> createProduct(Product product);
 
   Future<Either<Failure, List<Product>>> fetchProducts();
+
+  Future<Either<Failure, Product>> updateProduct(Product product);
 }
