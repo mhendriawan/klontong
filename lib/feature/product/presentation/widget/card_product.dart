@@ -18,16 +18,8 @@ class CardProduct extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: BMPalette.white,
+        color: BMPalette.grey1,
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(
-            color: BMPalette.grey,
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: Offset(0, 1),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
