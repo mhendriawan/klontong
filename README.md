@@ -1,5 +1,3 @@
-# Flutter Project README
-
 # Klontong Mobile App
 Klontong is a Flutter-based mobile application following Clean Architecture principles. It utilizes BLoC for state management and integrates Firebase services.
 
@@ -79,13 +77,6 @@ void main() async {
 The project follows a modular structure based on Clean Architecture:
 ```
 lib/
- ├── core/                     # Contains shared utilities and error handling
- │   ├── error/                # Failure and exception handling
- │   ├── network/              # Network service with Dio
- │   ├── usecase/              # Base use case classes
- │   ├── di.dart               # Dependency injection (GetIt)
- │   ├── constants.dart        # Application-wide constants
- │
  ├── feature/                  # Each feature has its own module
  │   ├── product/              # Product feature
  │   │   ├── data/             # Data layer (API, repository)
@@ -128,7 +119,3 @@ All failures are handled using `dartz` Either type for better functional error m
 
 ## Conclusion
 This project is structured for scalability and maintainability, following Clean Architecture and BLoC patterns. 🚀
-
-# Klontong Mobile App
-
-Klontong is a Flutter-based mobile application following Clean Architecture principles. It utilizes BLoC for state management and integrates Firebase services.
