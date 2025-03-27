@@ -17,7 +17,7 @@ Future<void> setupInjection() async {
     () => ProductBloc(sl()),
   );
   sl.registerLazySingleton<ProductDataSource>(
-    () => ProductDataSourceImpl(sl()),
+    () => ProductDataSourceImpl(sl(), sl()),
   );
   sl.registerLazySingleton<ProductRepository>(
     () => ProductRepositoryImpl(sl()),

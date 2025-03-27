@@ -1,9 +1,10 @@
 part of 'product_data_source.dart';
 
 class ProductDataSourceImpl implements ProductDataSource {
-  ProductDataSourceImpl(this.dio);
+  ProductDataSourceImpl(this.dio, this.urlConstant);
 
   final Dio dio;
+  final UrlConstant urlConstant;
 
   Map<String, String> headers = {
     'Content-Type': 'application/json',
@@ -12,7 +13,7 @@ class ProductDataSourceImpl implements ProductDataSource {
   @override
   Future<Product> createProduct(Product product) async {
     Response<dynamic> response = await dio.post(
-      UrlConstant.product,
+      urlConstant.product,
       data: product,
       options: Options(headers: headers),
     );
@@ -22,7 +23,7 @@ class ProductDataSourceImpl implements ProductDataSource {
   @override
   Future<List<Product>> fetchProducts() async {
     Response<dynamic> response = await dio.get(
-      UrlConstant.product,
+      urlConstant.product,
       options: Options(headers: headers),
     );
     List<Product> products = [];
@@ -39,7 +40,7 @@ class ProductDataSourceImpl implements ProductDataSource {
   @override
   Future<String> updateProduct(Product product) async {
     Response<dynamic> response = await dio.put(
-      "${UrlConstant.product}/${product.id}",
+      "${urlConstant.product}/${product.id}",
       data: product,
       options: Options(headers: headers),
     );
@@ -49,7 +50,7 @@ class ProductDataSourceImpl implements ProductDataSource {
   @override
   Future<String> deleteProduct(String productId) async {
     Response<dynamic> response = await dio.delete(
-      "${UrlConstant.product}/$productId",
+      "${urlConstant.product}/$productId",
       options: Options(headers: headers),
     );
     return response.data;

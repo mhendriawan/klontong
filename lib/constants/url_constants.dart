@@ -1,6 +1,18 @@
+import 'package:klontong_app/utils/utils.dart';
 class UrlConstant {
-  static const baseUrl =
-      "https://crudcrud.com/api/b0667c2dc4fd4da1b28f931013a2dd12";
+  final String tokenApi;
+  late final String baseUrl;
+  late final String product;
 
-  static const product = '$baseUrl/product';
+  // Private constructor
+  UrlConstant._(this.tokenApi) {
+    baseUrl = "https://crudcrud.com/api/$tokenApi";
+    product = "$baseUrl/product";
+  }
+
+  // Factory method to initialize with async token
+  static Future<UrlConstant> create() async {
+    String token = await RemoteConfig.fetchTokenApi();
+    return UrlConstant._(token);
+  }
 }
